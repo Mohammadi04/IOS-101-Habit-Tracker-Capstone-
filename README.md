@@ -1,4 +1,4 @@
-# IOS 101 Capstone Project brainstrom
+# IOS 101 Capstone Project Product Specs
 Author: Mohammad J. Islam
 # Idea
 For this project, I want to build something that will be very helpful to my day to day use. 
