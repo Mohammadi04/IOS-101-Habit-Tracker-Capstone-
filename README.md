@@ -13,4 +13,7 @@ we will have:
   * Streak count.
   * 7 day progress. 
   * Filter (Today/ all).
-  * Optional daily notification. 
+  * Optional daily notification.
+
+# Wire Frame 
+<img width="1105" height="614" alt="Image" src="https://github.com/user-attachments/assets/db22ad6a-65ee-4abc-aef3-dab6c0fa3156" />
