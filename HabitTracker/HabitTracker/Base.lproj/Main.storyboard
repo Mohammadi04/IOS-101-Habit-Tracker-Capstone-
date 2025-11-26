@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="nav">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+    </dependencies>
+
+    <!-- Navigation Controller -->
+    <scenes>
+        <scene sceneID="navScene">
+            <objects>
+                <navigationController id="nav" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="navBar"/>
+                    <connections>
+                        <segue destination="habitsVC" kind="relationship" relationship="rootViewController" id="rootSegue"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="navFirst" userLabel="First Responder" customClass="UIResponder"/>
+            </objects>
+        </scene>
+
+        <!-- HabitsViewController -->
+        <scene sceneID="habitsScene">
+            <objects>
+                <viewController id="habitsVC" customClass="HabitsViewController" sceneMemberID="viewController">
+                    <view key="view" id="habitsView" userLabel="Habits View" contentMode="scaleToFill">
+                        <rect key="frame" x="0" y="0" width="393" height="852"/>
+                        <subviews>
+
+                            <!-- Segmented Control -->
+                            <segmentedControl id="filterControl" translatesAutoresizingMaskIntoConstraints="YES">
+                                <rect key="frame" x="16" y="100" width="360" height="32"/>
+                                <segments>
+                                    <segment title="Today"/>
+                                    <segment title="All"/>
+                                </segments>
+                                <connections>
+                                    <action selector="filterChanged:" destination="habitsVC" eventType="valueChanged" id="filterChangedAction"/>
+                                </connections>
+                            </segmentedControl>
+
+                            <!-- Table View -->
+                            <tableView id="tableView" translatesAutoresizingMaskIntoConstraints="YES" dataMode="prototypes" rowHeight="80">
+                                <rect key="frame" x="0" y="140" width="393" height="712"/>
+                                <prototypes>
+                                    <tableViewCell id="habitCell" reuseIdentifier="HabitCell" customClass="HabitCell"/>
+                                </prototypes>
+                            </tableView>
+
+                        </subviews>
+
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+
+                    <navigationItem key="navigationItem" id="habitsNavItem" title="Habits">
+                        <barButtonItem key="leftBarButtonItem" title="Stats" style="plain" id="statsButton">
+                            <connections>
+                                <action selector="statsTapped:" destination="habitsVC" id="statsAction"/>
+                            </connections>
+                        </barButtonItem>
+
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="addButton">
+                            <connections>
+                                <action selector="addHabitTapped:" destination="habitsVC" id="addAction"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+
+                    <connections>
+                        <outlet property="tableView" destination="tableView" id="tableViewOutlet"/>
+                        <outlet property="filterControl" destination="filterControl" id="filterControlOutlet"/>
+                    </connections>
+                </viewController>
+
+                <placeholder placeholderIdentifier="IBFirstResponder" id="habitsFirst" userLabel="First Responder"/>
+            </objects>
+        </scene>
+
+        <!-- AddHabitViewController -->
+        <scene sceneID="addScene">
+            <objects>
+                <viewController id="addVC" customClass="AddHabitViewController" storyboardIdentifier="AddHabitViewController" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="addNavItem" title="New Habit"/>
+
+                    <view key="view" id="addView">
+                        <rect key="frame" x="0" y="0" width="393" height="852"/>
+                        <subviews>
+
+                            <textField id="nameField" placeholder="Habit Name" translatesAutoresizingMaskIntoConstraints="YES">
+                                <rect key="frame" x="20" y="120" width="353" height="34"/>
+                            </textField>
+
+                            <textField id="iconField" placeholder="Emoji (e.g. 💧)" translatesAutoresizingMaskIntoConstraints="YES">
+                                <rect key="frame" x="20" y="170" width="353" height="34"/>
+                            </textField>
+
+                            <switch id="reminderSwitch" translatesAutoresizingMaskIntoConstraints="YES">
+                                <rect key="frame" x="20" y="230" width="51" height="31"/>
+                            </switch>
+
+                            <label id="reminderLabel" text="Daily Reminder" translatesAutoresizingMaskIntoConstraints="YES">
+                                <rect key="frame" x="80" y="230" width="200" height="30"/>
+                            </label>
+
+                            <datePicker id="timePicker" datePickerMode="time" translatesAutoresizingMaskIntoConstraints="YES">
+                                <rect key="frame" x="20" y="280" width="353" height="150"/>
+                            </datePicker>
+
+                        </subviews>
+
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+
+                    <connections>
+                        <outlet property="nameTextField" destination="nameField" id="nameOutlet"/>
+                        <outlet property="iconTextField" destination="iconField" id="iconOutlet"/>
+                        <outlet property="reminderSwitch" destination="reminderSwitch" id="switchOutlet"/>
+                        <outlet property="reminderTimePicker" destination="timePicker" id="timePickerOutlet"/>
+                    </connections>
+                </viewController>
+
+                <placeholder placeholderIdentifier="IBFirstResponder" id="addFirst" userLabel="First Responder"/>
+            </objects>
+        </scene>
+
+        <!-- StatsViewController -->
+        <scene sceneID="statsScene">
+            <objects>
+                <viewController id="statsVC" customClass="StatsViewController" storyboardIdentifier="StatsViewController" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="statsNavItem" title="Stats"/>
+
+                    <view key="view" id="statsView">
+                        <rect key="frame" x="0" y="0" width="393" height="852"/>
+                        <subviews>
+
+                            <label id="totalLabel" text="Total Habits: 0" translatesAutoresizingMaskIntoConstraints="YES">
+                                <rect key="frame" x="20" y="160" width="300" height="40"/>
+                            </label>
+
+                            <label id="completedLabel" text="Completed Today: 0" translatesAutoresizingMaskIntoConstraints="YES">
+                                <rect key="frame" x="20" y="210" width="300" height="40"/>
+                            </label>
+
+                            <label id="remainingLabel" text="Remaining Today: 0" translatesAutoresizingMaskIntoConstraints="YES">
+                                <rect key="frame" x="20" y="260" width="300" height="40"/>
+                            </label>
+
+                            <label id="streakLabel" text="Best Streak: 0 days" translatesAutoresizingMaskIntoConstraints="YES">
+                                <rect key="frame" x="20" y="310" width="300" height="40"/>
+                            </label>
+
+                        </subviews>
+
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+
+                    <connections>
+                        <outlet property="totalLabel" destination="totalLabel" id="totalOutlet"/>
+                        <outlet property="completedLabel" destination="completedLabel" id="completedOutlet"/>
+                        <outlet property="remainingLabel" destination="remainingLabel" id="remainingOutlet"/>
+                        <outlet property="bestStreakLabel" destination="streakLabel" id="bestOutlet"/>
+                    </connections>
+                </viewController>
+
+                <placeholder placeholderIdentifier="IBFirstResponder" id="statsFirst" userLabel="First Responder"/>
+            </objects>
+        </scene>
+
+    </scenes>
+</document>
+
